@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --font-sans: Inter, "SF Pro Display", Manrope, ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+:root {
+  --font-size: 15px;
+  /* Light theme: clean, neutral */
+  /* New palette mapping */
+  /* Background ~ #F3F5FF */
+  --background: 228 100% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  /* Primary ~ #5B6CFF */
+  --primary: 234 100% 68%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 20% 40%;
+  --accent: 234 100% 68%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 234 100% 68%;
+  --radius: 0.75rem;
+
+  /* Additional design tokens (hex-based for direct usage if needed) */
+  --bg: #F3F5FF;
+  --text: #0F172A;
+  --muted-text: #6B7280;
+  --card-hex: #FFFFFF;
+  --primary-hex: #5B6CFF;
+  --primary-hover-hex: #4C5AE0;
+  --ring-rgba: rgba(91,108,255,.35);
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+  --shadow-card: 0 10px 30px rgba(20,25,40,.08);
+  --shadow-elevated: 0 18px 50px rgba(20,25,40,.12);
+}
+
+.dark {
+  --background: 222 47% 7%;
+  --foreground: 210 20% 98%;
+  --card: 222 47% 9%;
+  --card-foreground: 210 20% 98%;
+  --popover: 222 47% 9%;
+  --popover-foreground: 210 20% 98%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 217 19% 27%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 217 19% 27%;
+  --muted-foreground: 218 12% 65%;
+  --accent: 217 91% 60%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 62% 35%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 217 19% 27%;
+  --input: 217 19% 27%;
+  --ring: 217 91% 60%;
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+}
+
+/* Improve selection and scrollbar for a more polished feel */
+::selection { background-color: hsl(var(--primary) / 0.18); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--muted)); border-radius: 9999px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); background-clip: padding-box; }
+
+@layer base {
+  h1 { @apply scroll-m-20 text-4xl font-extrabold tracking-tight; }
+  h2 { @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0; }
+  h3 { @apply scroll-m-20 text-2xl font-semibold tracking-tight; }
+  h4 { @apply scroll-m-20 text-xl font-semibold tracking-tight; }
+  p { @apply leading-7 [&:not(:first-child)]:mt-6; }
+  blockquote { @apply mt-6 border-l-2 pl-6 italic; }
+  ul { @apply my-6 ml-6 list-disc [&>li]:mt-2; }
+  code { @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold; }
+  pre { @apply overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900; }
+  pre code { @apply relative rounded bg-transparent px-0 py-0 font-mono text-sm font-normal; }
+}
+
+html { font-size: var(--font-size); }
+
+/* Simple animated waves/particles for hero banner */
+@keyframes floatingWaves {
+  0% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(-10px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.9; }
+}
+
+.ai-waves {
+  background: radial-gradient(1200px 400px at 10% -10%, rgba(124, 58, 237, 0.08), transparent 60%),
+              radial-gradient(800px 300px at 90% 20%, rgba(45, 212, 191, 0.08), transparent 60%);
+  animation: floatingWaves 8s ease-in-out infinite;
+}
+
+.ai-text-gradient {
+  background: linear-gradient(90deg, #7C3AED 0%, #2DD4BF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle background grid you can overlay behind content */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(closest-side, black 60%, transparent);
+}
+
+/* Ensure containers are properly labeled for container queries and layout */
+.container {
+  /* Center and size */
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 1200px;
+  /* Enable container queries and provide common names */
+  container-type: inline-size;
+  container-name: page app root;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 2rem;
+    max-width: 1280px;
+  }
+}
+
+/* Provide a generic container context for any slotted component */
+[data-slot] {
+  container-type: inline-size;
+}
+
+/* Named containers required by UI components using @container/card-header */
+[data-slot="card-header"] {
+  container-type: inline-size;
+  container-name: card-header;
+}
